@@ -70,20 +70,11 @@ $$
 因此在代码实现上我们就可以实现两个环的直接相加或相减，在`TIM3`定时器中`10ms`一个周期进行控制。
 
 ```c
-void TIM3_IRQHandler(void)
-{
-  if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET) //检查TIM3更新中断发生与否
-  {
-    TIM_ClearITPendingBit(TIM3, TIM_IT_Update); //清除TIM3更新中断标志
-
-      Velocity = (Read_Encoder(2) + Read_Encoder(4)) / 2;
       Balance_PID_Result = Position_PID_Cal(&Balance_PID, imu.Roll + 0.3f);
-      if (Time_GAP_20ms)Velocity_PID_Result = Position_PID_Cal(&Velocity_PID, Velocity);
-      PID_Result = Balance_PID_Result + Velocity_PID_Result;
+      if (Time_GAP_20ms) Velocity_PID_Result = Position_PID_Cal(&Velocity_PID, Velocity);
 
+      PID_Result = Balance_PID_Result + Velocity_PID_Result;
       Set_Motor_Speed(PID_Result, PID_Result);
-  }
-}
 ```
 
 ####   2.1.2调参经验
@@ -248,12 +239,69 @@ void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float
 
 
 
+## 3. 程序逻辑
+
+首先看main函数：
+
+```c
+int main(void)
+{
+	All_HardWare_init();
+	while (1)
+	{
+		Protect_Check();
+		LED_show_working();
+		LCD_show_Brief_info();
+	}
+}
+```
+
+代码都封装在了函数里，因此主控的main函数非常简单。`All_HardWare_init();`包含了所有硬件、片内资源的初始化。**因为`Mahony`每次上电融合解算姿态时需要几秒的自我校准，因此先打开定时器。**
+
+```c
+	TIM3_Int_Init(99, 7199); // 72M ÷7200 ÷100 = 10 ms
+```
+
+几秒过后再初始化PID控制器
+
+```c
+	PID_init();              //直立环，速度环PID控制器初始化
+```
+
+**`定时器3中断服务函数`在`control.c`文件中，包含姿态解算和PID控制。**
+
+```c
+void TIM3_IRQHandler(void)
+{
+  if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET) 
+  {   TIM_ClearITPendingBit(TIM3, TIM_IT_Update);             
+     /**
+      *PID控制与姿态解算部分，详情请TP至
+      *....../主控程序/HARDWARE/control/control.c
+      *
+      */
+  }
+}
+```
+
+
+
+死循环中目前三个函数分别是LED、LCD状态显示和 一个简易的过倾保护。
+
+```c
+void Protect_Check(void)
+{
+	if (imu.Roll > 30 || imu.Roll < -30)
+		Protect = 1;
+	else
+		Protect = 0;
+}
+```
 
 
 
 
-
-## 3. 补充
+## 4. 补充
 
 > ```
 > NULL

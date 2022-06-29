@@ -17,13 +17,10 @@
 int main(void)
 {
 	All_HardWare_init();
-
 	while (1)
 	{
 		Protect_Check();
 		LED_show_working();
 		LCD_show_Brief_info();
 	}
-	
-	
 }

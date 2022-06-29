@@ -43,17 +43,17 @@ void All_HardWare_init(void)
 
 	TIM3_Int_Init(99, 7199); // 72M ÷7200 ÷100 = 10 ms
 
-//	while (TIM3_Tick < 500)
-//	{
-//		LCD_printf(200, 90, "%d", TIM3_Tick / 10 * 2);
-//		Protect_Check();
-//	}
-//	LCD_ShowChinese(0, 90, "陀螺仪校准成功", WHITE, BLACK, 32, 0);
-//	while (TIM3_Tick < 650)
-//	{
-//		LCD_ShowChar(224, 90, '.', WHITE, BLACK, 32, 0);
-//		Protect_Check();
-//	}
+	while (TIM3_Tick < 500)
+	{
+		LCD_printf(200, 90, "%d", TIM3_Tick / 10 * 2);
+		Protect_Check();
+	}
+	LCD_ShowChinese(0, 90, "陀螺仪校准成功", WHITE, BLACK, 32, 0);
+	while (TIM3_Tick < 650)
+	{
+		LCD_ShowChar(224, 90, '.', WHITE, BLACK, 32, 0);
+		Protect_Check();
+	}
 
 	LCD_Fill(0, 90, LCD_W, 122, BLACK);
 	PID_init();
