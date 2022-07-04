@@ -7,7 +7,7 @@
 void LCD_show_Brief_info(void)
 {
 	LCD_printf(0, 0, "Roll:%.2f", imu.Roll);
-	LCD_printf(0, 40, "Temp:%.2f", IMU_Temperature);
+	//LCD_printf(0, 40, "Temp:%.2f", IMU_Temperature);
 }
 
 

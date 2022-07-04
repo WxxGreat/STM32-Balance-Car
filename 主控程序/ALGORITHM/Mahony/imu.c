@@ -97,12 +97,6 @@ int16_t IMU_GetAvg(int16_t *IMU_FIFO)
 
 	IMU_readGyro_Acc(&gyro[0], &acc[0]);
 	
-#if USE_ICM42605 == 1
-	    Get_ICM42605_Tempdata(&IMU_Temperature);
-#else
-      MPU_Get_Temperature(&IMU_Temperature);
-#endif
-	
 	for (; i < 3; i++)
 	{
 		IMU_values[i] = ((float)gyro[i]) / 16.4f; // gyro range: +-2000; adc accuracy 16 bits: 2^16=65536; 65536/4000=16.4; so  1^-> 16.4
@@ -183,7 +177,13 @@ void IMU_Update(void)
 	static float q[4];
 	float Values[6];
 	Get_IMU_Values(Values);
-
+#if USE_ICM42605 == 1
+	    Get_ICM42605_Tempdata(&IMU_Temperature);
+#else
+      //  MPU_Get_Temperature(&IMU_Temperature);
+#endif
+	
+	
 	//将角度更改为弧度，使用Mahony计算
 	MahonyAHRSupdateIMU(Values[0] * 3.14159265358979f / 180, Values[1] * 3.14159265358979f / 180, Values[2] * 3.14159265358979f / 180,Values[3], Values[4], Values[5]);
 
@@ -204,6 +204,10 @@ void IMU_Update(void)
   //四元数法计算欧拉角
 	imu.Roll = (atan2(2.0f * (q[0] * q[1] + q[2] * q[3]), 1 - 2.0f * (q[1] * q[1] + q[2] * q[2]))) * 180 / 3.14159265358979f;
 //imu.Pitch = -safe_asin(2.0f * (q[0] * q[2] - q[1] * q[3])) * 180 / 3.14159265358979f;
+//  imu.Yaw = -atan2(2 * q1 * q2 + 2 * q0 * q3, -2 * q2*q2 - 2 * q3 * q3 + 1)* 180/3.14159265358979f;
+//  if(Yaw >=  360  ) Yaw = 0;
+//	if(Yaw <= -360  ) Yaw = 0;			
+//  imu.Yaw += ((double)(-gyroz + Yaw_offset) * 3.1415926f / 360 / 32.8f * 0.1 * 1.5 );//1.5是系数
 
 }
 

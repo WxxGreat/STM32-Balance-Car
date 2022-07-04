@@ -1245,24 +1245,26 @@ void TIM_SelectInputTrigger(TIM_TypeDef* TIMx, uint16_t TIM_InputTriggerSource)
 /**
   * @brief  Configures the TIMx Encoder Interface.
   * @param  TIMx: where x can be  1, 2, 3, 4, 5 or 8 to select the TIM peripheral.
+
   * @param  TIM_EncoderMode: specifies the TIMx Encoder Mode.
   *   This parameter can be one of the following values:
   *     @arg TIM_EncoderMode_TI1: Counter counts on TI1FP1 edge depending on TI2FP2 level.
   *     @arg TIM_EncoderMode_TI2: Counter counts on TI2FP2 edge depending on TI1FP1 level.
   *     @arg TIM_EncoderMode_TI12: Counter counts on both TI1FP1 and TI2FP2 edges depending
   *                                on the level of the other input.
+
   * @param  TIM_IC1Polarity: specifies the IC1 Polarity
   *   This parameter can be one of the following values:
-  *     @arg TIM_ICPolarity_Falling: IC Falling edge.
+  *     @arg TIM_ICPolarity_Falling: IC Falling edge. 
   *     @arg TIM_ICPolarity_Rising: IC Rising edge.
+
   * @param  TIM_IC2Polarity: specifies the IC2 Polarity
   *   This parameter can be one of the following values:
   *     @arg TIM_ICPolarity_Falling: IC Falling edge.
   *     @arg TIM_ICPolarity_Rising: IC Rising edge.
   * @retval None
   */
-void TIM_EncoderInterfaceConfig(TIM_TypeDef* TIMx, uint16_t TIM_EncoderMode,
-                                uint16_t TIM_IC1Polarity, uint16_t TIM_IC2Polarity)
+void TIM_EncoderInterfaceConfig(TIM_TypeDef* TIMx, uint16_t TIM_EncoderMode, uint16_t TIM_IC1Polarity, uint16_t TIM_IC2Polarity)
 {
   uint16_t tmpsmcr = 0;
   uint16_t tmpccmr1 = 0;

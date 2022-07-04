@@ -32,13 +32,15 @@ typedef struct
 
 void PID_Init(PID *s_PID, float set_point, float Kp, float Ki, float Kd); //PID初始化
 
-void PID_SetOutRange(PID *s_PID, float outMax, float outMin);         //设置PID输出范围
-void PID_SetIntegralOutRange(PID *s_PID, float outMax, float outMin); //设置PID积分范围
+void PID_Set_out_Range(PID *s_PID, float outMax, float outMin);         //设置PID输出范围
+void PID_Set_Integral_out_Range(PID *s_PID, float outMax, float outMin); //设置PID积分范围
 void PID_SetPoint(PID *s_PID, float set_point);                              //设置目标值
 
 float Increment_PID_Cal(PID *s_PID, float now_point); //增量式PID计算
 float Position_PID_Cal(PID *s_PID, float now_point);  //位置式PID计算
 float PID_Cal(PID *s_PID, float now_point);           //比例外置式PID
+
+float Balance_Car_Velocity_ONLY_Position_PID_Cal(PID *s_PID, float now_point , unsigned char State_Flag);
 
 void PID_Integral_limit(PID *s_PID, float *IOutValue);
 void PID_Output_limit(PID *s_PID, float *Result);

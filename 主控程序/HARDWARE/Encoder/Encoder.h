@@ -5,7 +5,7 @@
 
 void Encoder_Init_TIM2(void);
 void Encoder_Init_TIM4(void);
-int Read_Encoder(u8 TIMX);
+int16_t Read_Encoder(u8 TIMX);
 
 
 #endif

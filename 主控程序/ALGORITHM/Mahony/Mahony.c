@@ -1,9 +1,9 @@
 #include "Mahony.h"
 #include "math.h"
 
-#define IMU_Update_Freq 100.0f	 // 频率（Hz）必须等于IMU_Update()调用的频率。
-#define twoKpDef (2.0f * 0.49f)  // 2 * proportional gain
-#define twoKiDef (2.0f * 0.001f) // 2 * integral gain
+#define IMU_Update_Freq 200	 // 频率（Hz）必须等于IMU_Update()调用的频率。
+#define twoKpDef (2.0f * 2.50f)  // 2 * proportional gain
+#define twoKiDef (2.0f * 0.08f) // 2 * integral gain
 
 volatile float twoKp = twoKpDef; // 2 * proportional gain (Kp)
 volatile float twoKi = twoKiDef; // 2 * integral gain (Ki)

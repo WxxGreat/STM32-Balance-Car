@@ -40,8 +40,7 @@ void All_HardWare_init(void)
 #endif
 	/*******************************************/
 
-
-	TIM3_Int_Init(99, 7199); // 72M ¡Â7200 ¡Â100 = 10 ms
+	TIM3_Int_Init(49, 7199); // 72M ¡Â7200 ¡Â50 = 20 ms
 
 	while (TIM3_Tick < 500)
 	{

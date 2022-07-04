@@ -100,7 +100,7 @@ uint8_t MPU_Set_Rate(u16 rate)
  * @author   WxxGreat
  */
 #define Temperature_FIFO_SIZE 10 //采样数据个数
-static short Temperature_FIFO[Temperature_FIFO_SIZE] = {0};
+static unsigned short Temperature_FIFO[Temperature_FIFO_SIZE] = {0};
 void MPU_Get_Temperature(float *MPU6050_Temperature)
 {
 	static unsigned char MPU6050_Temperature_Index;
