@@ -28,12 +28,10 @@ if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET) //殊臥TIM3厚仟嶄僅窟伏嚥倦
 	TIM3_Tick++;
 //！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！//		
 	IMU_Update();
+	
  // printf("%.2f\r\n",imu.Roll);
 	if (Protect)  SYSTEM_STOP;
-	else
-	{
-    Balance_Control(0);
-	}	
+	else  Balance_Control(0);	
 	
 //！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！//		
 }}
