@@ -63,9 +63,9 @@ $$
 **合并一下就可以得到：**
 
 
-$$
-a=Kp*(\theta)+Kd*\theta'-Kp[kp_1*Err_{speed}+ki_1*\sum Err_{speed}] \qquad········③最终式
-$$
+
+$$ a=Kp*(\theta)+Kd*\theta'-Kp[kp_1*Err_{speed}+ki_1*\sum Err_{speed}] \qquad········③最终式 $$
+
 
 
 因此在代码实现上我们就可以实现两个环的直接相加或相减，在`TIM3`定时器中`10ms`一个周期进行控制。
