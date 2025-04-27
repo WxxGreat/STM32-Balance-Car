@@ -56,7 +56,7 @@ a_1=Kp*(\theta-a_2)+Kd*\theta'  \qquad·····················
 $$
 
 $$
-a_2=Kp_1*Err_{speed}+Ki_1*\sum Err_{speed}\space   \qquad····························②速度环
+a_2=Kp_1* Err_{speed}+Ki_1 * \sum Err_{speed}\space   \qquad····························②速度环
 $$
 
 
@@ -64,7 +64,9 @@ $$
 
 
 
-$$ a=Kp*(\theta)+Kd*\theta'-Kp[kp_1*Err_{speed}+ki_1*\sum Err_{speed}] \qquad········③最终式 $$
+$$
+a=Kp*(\theta)+Kd*\theta'-Kp \left [kp_1 * Err_{speed}+ki_1 * \sum Err_{speed} \right ] \qquad········③最终式
+$$
 
 
 
